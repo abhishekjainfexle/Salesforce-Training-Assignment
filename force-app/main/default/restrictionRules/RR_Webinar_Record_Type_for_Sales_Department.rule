@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RestrictionRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <enforcementType>Restrict</enforcementType>
+    <masterLabel>RR_Webinar Record Type for Sales Department</masterLabel>
+    <recordFilter>RecordTypeId=&apos;012WU0000031ZbVYAU&apos;</recordFilter>
+    <targetEntity>Training_Session__c</targetEntity>
+    <userCriteria>$User.Department=&apos;Sales&apos;</userCriteria>
+    <version>1</version>
+</RestrictionRule>
