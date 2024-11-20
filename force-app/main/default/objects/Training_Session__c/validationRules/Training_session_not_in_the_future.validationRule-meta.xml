@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Training_session_not_in_the_future</fullName>
+    <active>true</active>
+    <errorConditionFormula>Session_Date__c &lt;  TODAY()</errorConditionFormula>
+    <errorMessage>Session Date Must be in future Only</errorMessage>
+</ValidationRule>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Feedback_Rating_Sum__c</fullName>
+    <externalId>false</externalId>
+    <label>Feedback Rating Sum</label>
+    <summarizedField>Feedback__c.Rating__c</summarizedField>
+    <summaryForeignKey>Feedback__c.Training_Session__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Service_Provider_Quteue_Training_Session</fullName>
+    <filterScope>Queue</filterScope>
+    <label>Service Provider Queue</label>
+    <queue>Service_Provider_Quteue</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>
