@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RestrictionRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <enforcementType>Restrict</enforcementType>
+    <masterLabel>Restrict Feedback visibility to owner&apos;s</masterLabel>
+    <recordFilter>Training_Session__r.OwnerId=$User.Id</recordFilter>
+    <targetEntity>Feedback__c</targetEntity>
+    <userCriteria>$User.ProfileId=&apos;00eWU000006mHJG&apos;</userCriteria>
+    <version>1</version>
+</RestrictionRule>

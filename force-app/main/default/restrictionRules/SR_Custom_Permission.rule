@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RestrictionRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <enforcementType>Scoping</enforcementType>
+    <masterLabel>SR_Custom_Permission</masterLabel>
+    <recordFilter>OR(ISPICKVAL(Industry,&apos;Consulting&apos;), ISPICKVAL(Industry,&apos;Engineering&apos;))</recordFilter>
+    <targetEntity>Lead</targetEntity>
+    <userCriteria>$Permission.View_Lead_Permission=true</userCriteria>
+    <version>1</version>
+</RestrictionRule>
