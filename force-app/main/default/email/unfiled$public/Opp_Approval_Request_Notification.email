@@ -1,0 +1,9 @@
+Hello, {!ApprovalRequest.Process_Assignee}
+{!ApprovalRequest.Process_Approver}
+
+{!Opportunity.OwnerFullName} has requested your approval for the following item.
+Please click this link to approve or reject this record: {!ApprovalRequest.Internal_URL}
+
+
+Thank you
+{!Opportunity.OwnerFullName}
