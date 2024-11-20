@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fields>
-        <fullName>Discount_Approved__c</fullName>
-        <defaultValue>false</defaultValue>
-        <externalId>false</externalId>
-        <label>Discount Approved</label>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
-    </fields>
-    <fields>
-        <fullName>Discount_Percent__c</fullName>
-        <externalId>false</externalId>
-        <label>Discount Percent</label>
-        <precision>18</precision>
-        <required>false</required>
-        <scale>2</scale>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackTrending>false</trackTrending>
-        <type>Percent</type>
-    </fields>
+    <compactLayouts>
+        <fullName>Abhishek_Compact_Layout</fullName>
+        <fields>Name</fields>
+        <fields>Amount</fields>
+        <fields>StageName</fields>
+        <fields>CloseDate</fields>
+        <label>Abhishek Compact Layout</label>
+    </compactLayouts>
 </CustomObject>
