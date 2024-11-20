@@ -93,25 +93,29 @@
         <customLabel>true</customLabel>
         <detailHeading>true</detailHeading>
         <editHeading>true</editHeading>
-        <label>Service Provider Information</label>
+        <label>Customer Information</label>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Service_Type__c</field>
+                <field>Customer_Type__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Provider_Rating__c</field>
+                <field>Customer_status__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Customer_Account_number__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Service_Availability__c</field>
+                <field>Customer_Loyalty_Points__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Service_Coverage_Area__c</field>
+                <field>Customer_Segment__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
@@ -186,6 +190,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Customer_Preference__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Service_Coverage_Area__c</field>
             </layoutItems>
         </layoutColumns>
         <style>OneColumn</style>
@@ -404,7 +412,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00hWU0000082mYb</masterLabel>
+        <masterLabel>00hWU0000082kF3</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>
