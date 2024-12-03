@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>WEBINAR_RECORD_TYPE_MESSAGE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>WEBINAR RECORD TYPE MESSAGE</shortDescription>
+        <value>Training Session Record Created with Webinar Record type</value>
+    </labels>
+    <labels>
+        <fullName>WORKSHOP_RECORD_TYPE_MESSAGE</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>WORKSHOP RECORD TYPE MESSAGE</shortDescription>
+        <value>Training Session Record Created with Workshop Record type</value>
+    </labels>
+</CustomLabels>
