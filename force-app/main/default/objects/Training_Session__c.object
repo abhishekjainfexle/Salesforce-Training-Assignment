@@ -1,19 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
-    <recordTypes>
-        <fullName>Webinar</fullName>
-        <active>true</active>
-        <label>Webinar</label>
-    </recordTypes>
-    <recordTypes>
-        <fullName>Workshop</fullName>
-        <active>true</active>
-        <label>Workshop</label>
-    </recordTypes>
-    <validationRules>
-        <fullName>Training_session_not_in_the_future</fullName>
-        <active>true</active>
-        <errorConditionFormula>Session_Date__c &lt;  TODAY()</errorConditionFormula>
-        <errorMessage>Session Date Must be in future Only</errorMessage>
-    </validationRules>
+    <fields>
+        <fullName>Average_Session_Feedback__c</fullName>
+        <externalId>false</externalId>
+        <formula>Feedback_Rating_Sum__c  /  Feedback_Record_count__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Average Session Feedback</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Feedback_Rating_Sum__c</fullName>
+        <label>Feedback Rating Sum</label>
+        <summarizedField>Feedback__c.Rating__c</summarizedField>
+        <summaryForeignKey>Feedback__c.Training_Session__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Feedback_Record_count__c</fullName>
+        <label>Feedback Record count</label>
+        <summaryForeignKey>Feedback__c.Training_Session__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Location__c</fullName>
+        <externalId>false</externalId>
+        <label>Location</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Session_Date__c</fullName>
+        <label>Session Date</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Session_Type__c</fullName>
+        <label>Session Type</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Webinar</fullName>
+                    <default>false</default>
+                    <label>Webinar</label>
+                </value>
+                <value>
+                    <fullName>Workshop</fullName>
+                    <default>false</default>
+                    <label>Workshop</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Total_Attendee__c</fullName>
+        <label>Total Attendee</label>
+        <summaryForeignKey>Attendee__c.Training_Session__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Webinar_Link__c</fullName>
+        <label>Webinar Link</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
 </CustomObject>
