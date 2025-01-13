@@ -1,39 +1,39 @@
 /**
- * 
- * Prupose : Class to perform Some demo Operation on Contact object.
- * 
- * Created Date : 27-11-2024
- * 
- * Created By : Abhishek Jain
- * 
- * Revision Logs : V_1.0 - Created
- * 				   V_2.0 - Modified (Updated Trigger using FrameWork logic)
- * 
- * */
+* 
+* Prupose : Class to perform Some demo Operation on Contact object.
+* 
+* Created Date : 27-11-2024
+* 
+* Created By : Abhishek Jain
+* 
+* Revision Logs : V_1.0 - Created
+* 				   V_2.0 - Modified (Updated Trigger using FrameWork logic)
+* 
+* */
 
 
 public without sharing class ContactTriggerHandler extends TriggerHandler{
-   
-   /**
-   * Description : Validates that the email domain of a Contact matches the domain name
-    * of the related parent Account during the 'before insert' trigger event.
-    * Throws an error if the domains do not match.
-    * 
-    * @Return : void
-    * 
-    * @Arguments : 
-    * 
-    * CreatedBy : Abhishek Jain
-    * 
-    * Created Date : 27/11/2024
-    * 
-    * Modified Date : 11-12-2024 by Abhishek Jain
-    * */    
+    
+    /**
+* Description : Validates that the email domain of a Contact matches the domain name
+* of the related parent Account during the 'before insert' trigger event.
+* Throws an error if the domains do not match.
+* 
+* @Return : void
+* 
+* @Arguments : 
+* 
+* CreatedBy : Abhishek Jain
+* 
+* Created Date : 27/11/2024
+* 
+* Modified Date : 11-12-2024 by Abhishek Jain
+* */    
     
     public override void beforeInsert() {
         
         // Map to hold Account IDs linked to the Contacts being inserted
-        Map<Id, Account> mapOfAccountAndId = new Map<Id, Account>();
+        Map<Id, Account> mapOfAccountAndId   = new Map<Id, Account>();
         
         // Collect Account IDs for Contacts that have AccountId and Email values
         for (Contact newCon : (List<Contact>) Trigger.new) {
@@ -50,23 +50,24 @@ public without sharing class ContactTriggerHandler extends TriggerHandler{
         
         // Delegate the main logic to a separate method
         handleContactBeforeLogicMainMethod(mapOfAccountAndId);
+        showPickListNamesAndObjectNameUsingDynamicApex((List<Contact>) Trigger.new);
     }
-
+    
     /**
-   * Description : Validates that the email domain of a Contact matches the domain name
-    * of the related parent Account during the 'before update' trigger event.
-    * Throws an error if the domains do not match.
-    * 
-    * @Return : void
-    * 
-    * @Arguments : 
+* Description : Validates that the email domain of a Contact matches the domain name
+* of the related parent Account during the 'before update' trigger event.
+* Throws an error if the domains do not match.
+* 
+* @Return : void
+* 
+* @Arguments : 
 
-    * CreatedBy : Abhishek Jain
-    * 
-    * Created Date : 27/11/2024
-    * 
-    * Modified Date : 11-12-2024 by Abhishek Jain
-    * */    
+* CreatedBy : Abhishek Jain
+* 
+* Created Date : 27/11/2024
+* 
+* Modified Date : 11-12-2024 by Abhishek Jain
+* */    
     
     public override void beforeUpdate() {
         
@@ -81,7 +82,7 @@ public without sharing class ContactTriggerHandler extends TriggerHandler{
             
             // Check if AccountId and Email are not null and have been changed
             if (newCon.AccountId != null && newCon.Email != null && (newCon.AccountId != oldConMap.get(newCon.Id).AccountId || 
-                 newCon.Email != oldConMap.get(newCon.Id).Email)) 
+                                                                     newCon.Email != oldConMap.get(newCon.Id).Email)) 
             {
                 // Add the AccountId to the map for validation
                 mapOfAccountAndId.put(newCon.AccountId, new Account());
@@ -98,22 +99,22 @@ public without sharing class ContactTriggerHandler extends TriggerHandler{
         handleContactBeforeLogicMainMethod(mapOfAccountAndId);
         
     }
-
-    /**
-   * Description : Main Logic to run in both Insert and update methods
-    * 
-    * @Return : void
-    * 
-    * @Arguments : 
-    * 
-    * CreatedBy : Abhishek Jain
-    * 
-    * Created Date : 27/11/2024
-    * 
-    * Modified Date : 11-12-2024 by Abhishek Jain
-    * */    
     
-        
+    /**
+* Description : Main Logic to run in both Insert and update methods
+* 
+* @Return : void
+* 
+* @Arguments : 
+* 
+* CreatedBy : Abhishek Jain
+* 
+* Created Date : 27/11/2024
+* 
+* Modified Date : 11-12-2024 by Abhishek Jain
+* */    
+    
+    
     public static void handleContactBeforeLogicMainMethod(Map<Id, Account> mapOfId_Account) {
         
         // Initialize a map to store the queried Account records by their Id.
@@ -127,7 +128,7 @@ public without sharing class ContactTriggerHandler extends TriggerHandler{
             {
                 mapOfQueryAccountAndId.put(acc.Id, acc);
             }
-                        
+            
             // Iterate through the new Contact records in the trigger context.
             for (Contact newCon : (List<Contact>) Trigger.new) {
                 
@@ -156,4 +157,66 @@ public without sharing class ContactTriggerHandler extends TriggerHandler{
             }
         }
     }
+    
+    
+    /**
+* Description : Method to use Dynamic apex to show object name and all the picklist field.
+* 
+* @Return : void
+* 
+* @Arguments : List<Contact> newContactList
+* 
+* CreatedBy : Abhishek Jain
+* 
+* Created Date : 26/12/2024
+* 
+* Modified Date : 
+* */    
+    
+    public static void showPickListNamesAndObjectNameUsingDynamicApex(List<Contact> newContactList){
+        for(Contact con : newContactList){
+            
+            try{
+                if(String.isNotBlank(con.RecordId__c)){
+                    
+                    if(con.RecordId__c instanceof Id){
+                        Map<String, String> objectPickListMap = new Map<String, String>();
+                        
+                        Id recordId = Id.valueOf(con.RecordId__c);
+                        String objName = recordId.getSObjectType().getDescribe().getName();
+                        
+                        if(String.isNotBlank(objName)){
+                            con.Object_Name__c = objName;
+                            if(!objectPickListMap.containsKey(objName)){
+                                
+                                Map<String, Schema.SObjectField> fieldsMap = recordId.getSObjectType().getDescribe().fields.getMap();
+                                
+                                // Initialize a string to store picklist field names
+                                String picklistFields = '';
+                                
+                                // Iterate through fields and check if the field is a picklist
+                                for (Schema.SObjectField field : fieldsMap.values()) {
+                                    
+                                    Schema.DescribeFieldResult fieldDescribe = field.getDescribe();
+                                    if (fieldDescribe.getType() == Schema.DisplayType.Picklist) {
+                                        picklistFields += fieldDescribe.getName() + '\n';
+                                    }
+                                }
+                                objectPickListMap.put(objName, picklistFields);                     
+                            }
+                        }
+                        con.Picklist_Field__c = objectPickListMap.get(objName);
+                    }
+                }
+                else{
+                    
+                    throw new IllegalArgumentException('Any exception related text');
+                }
+            }
+            catch(Exception e){
+                System.debug('Error Processiong contact: ' + e.getMessage());
+            }
+        }
     }
+
+}
