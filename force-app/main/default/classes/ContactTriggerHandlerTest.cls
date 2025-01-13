@@ -197,4 +197,96 @@ public class ContactTriggerHandlerTest {
 
        
     }
+    
+    
+     /**
+     * Description : Created a positive Test method to check UseOfDynamicApex method from Contact Trigger Handler Class.
+     * 
+     * @Return : Void
+     * 
+     * Created By : Abhishek Jain
+     * 
+     * Created Date : 02/01/2025
+     * 
+     * Modified : 
+     * 
+     */ 
+    
+    @isTest
+    static void negativeTestshowPickListNamesAndObjectNameUsingDynamicApex() {
+        // Create a valid Contact with a valid RecordId__c (Account Id)
+        Account acc = [SELECT Id, Domain_Name__c FROM Account WHERE Domain_Name__c = '1fexle.com' LIMIT 1];
+
+        // Create a Contact List with an invalid RecordId__c
+        List<Contact> contactList = new List<Contact>();
+        for(Integer i = 1; i<5; i++){
+            Contact invalidContact = new Contact(
+                LastName = 'Invalid Contact' + i,
+                RecordId__c = 'sdfsdvdv'
+            );
+            contactList.add(invalidContact);    
+        }
+
+        // Insert the contacts to trigger before insert logic
+        Test.startTest();
+        insert contactList;
+        System.debug('@@@@@@22'+contactList);
+        
+        // Retrieve the contacts to validate the outcomes
+        List<Contact> insertedContacts = [SELECT Id, Object_Name__c, Picklist_Field__c 
+                                          FROM Contact
+                                         ];
+        // Assertions
+        System.assertEquals(null, insertedContacts[0].Object_Name__c, 'The object name should not be set for an invalid RecordId__c.');
+        Test.stopTest();
+    }
+
+    
+    /**
+     * Description : Created a positive Test method to check UseOfDynamicApex method from Contact Trigger Handler Class.
+     * 
+     * @Return : Void
+     * 
+     * Created By : Abhishek Jain
+     * 
+     * Created Date : 02/01/2025
+     * 
+     * Modified : 
+     * 
+     */ 
+    
+    @isTest
+    static void positiveTestshowPickListNamesAndObjectNameUsingDynamicApex() {
+        // Create a valid Contact with a valid RecordId__c (Account Id)
+        Account acc = [SELECT Id, Domain_Name__c FROM Account WHERE Domain_Name__c = '1fexle.com' LIMIT 1];
+
+        // Create a Contact List with an valid RecordId__c
+        List<Contact> contactList = new List<Contact>();
+        for(Integer i = 1; i<5; i++){
+            Contact validContact = new Contact(
+                LastName = 'valid Contact' + i,
+                RecordId__c = acc.Id
+            );
+            contactList.add(validContact);    
+        }
+
+        // Insert the contacts to trigger before insert logic
+        Test.startTest();
+        insert contactList;
+        
+        // Retrieve the contacts to validate the outcomes
+        List<Contact> insertedContacts = [
+                                            SELECT Id, RecordId__c, LastName, Object_Name__c, Picklist_Field__c 
+                                            FROM Contact
+                                        ];
+        
+        // Assertions
+        System.assertEquals('Account', insertedContacts[0].Object_Name__c, 'The object name should be Account.');
+        System.assertNotEquals(null, insertedContacts[0].Picklist_Field__c, 'Picklist fields should be populated.');
+        System.assertEquals('Account', insertedContacts[3].Object_Name__c, 'The object name should be Account.');
+        System.assertNotEquals(null, insertedContacts[3].Picklist_Field__c, 'Picklist fields should be populated.');
+        Test.stopTest();
+    }
+    
+   
 }

@@ -6,7 +6,7 @@ public class TestFactory {
         {
             Account testAccount = new Account(
             Name = (name != null ? name : 'Test Account') + i,
-            Domain_Name__c = i + (domainName != null ? domainName : 'fexle.com')
+            Domain_Name__c = i + (domainName != null ? domainName : '')
         );
         accList.add(testAccount);
 

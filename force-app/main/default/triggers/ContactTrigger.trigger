@@ -12,6 +12,22 @@
 trigger ContactTrigger on Contact (before insert, before update, before delete, after insert, after update, after delete, after undelete) {
     
            new ContactTriggerHandler().run();
-
+           
+    /*if(trigger.isBefore && trigger.isInsert){
+        ContactTriggerHandlerAmanSirAssignment.duplicateCheckOnContact(trigger.new);
+    }
+    
+    if(trigger.isAfter){
+        if(trigger.isInsert || trigger.isUpdate || trigger.isDelete){
+            
+           //ContactTriggerHandlerAmanSirAssignment.countContactwithEmailWithoutEmail(trigger.new, trigger.old, trigger.oldMap);
+            
+        }
+    }
+    
+    if(trigger.isAfter){
+        if(trigger.isInsert){
+    ContactTriggerHandlerAmanSirAssignment.duplicateCheckOnContact(trigger.newMap);
+    }}*/
     
 }
