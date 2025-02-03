@@ -1,0 +1,22 @@
+<template>
+    
+    <lightning-card title="Related Contacts" icon-name="standard:contact">
+        <lightning-datatable
+            key-field="id"
+            data={resultData}
+            columns={columns}
+            show-row-number-column
+            row-number-offset={rowOffset}
+            draft-values={draftValues}
+            hide-chec   kbox-column
+            onsave={handleOnSave}
+            oncancel={handleOnCancel}
+            >
+        </lightning-datatable>
+        <template if:true={error}>
+            <div class="slds-text-color_error slds-m-top_medium">
+                <p>Error loading contacts: {error.message}</p>
+            </div>
+        </template>
+    </lightning-card>
+</template>

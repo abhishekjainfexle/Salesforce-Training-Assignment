@@ -1,0 +1,79 @@
+<template>
+    <lightning-card  title="Account Information">
+      <lightning-record-view-form
+            object-api-name={objectApiName}
+            record-id={recordId}>
+                <div class="slds-box">
+                  <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" padding="around-small" small-device-size="3" medium-device-size="6"
+                        large-device-size="6">
+                        <lightning-output-field field-name="Name"> </lightning-output-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" padding="around-small" small-device-size="3" medium-device-size="6"
+                        large-device-size="6">
+                        <lightning-output-field field-name="AccountNumber"></lightning-output-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" padding="around-small" small-device-size="3" medium-device-size="6"
+                        large-device-size="6">
+                        <lightning-output-field field-name="Website"></lightning-output-field>
+                      </lightning-layout-item>
+                    <lightning-layout-item size="12" padding="around-small" small-device-size="3" medium-device-size="6"
+                        large-device-size="6">
+                        <lightning-output-field field-name="Phone"></lightning-output-field>
+                      </lightning-layout-item>
+                </lightning-layout>
+                </div>
+        </lightning-record-view-form>
+        <lightning-button class="slds-align_absolute-center slds-p-bottom_xx-smal slds-p-top_x-small" variant="brand" 
+        label="New Contact" onclick={handleOnClick}>
+        </lightning-button>
+    </lightning-card>
+
+
+    <template if:true={state.showModalPopUpToCreateContact}>
+        <c-lwc-assi2-child-component
+          oncloselightningmodalpopup={hideModalPopUpToCreateContact}
+          is-small-modal
+          data-testid="sendToToolbeltLightningModal"
+        >
+          <span slot="modalTitle">Create New Contact</span>
+          <span slot="modalBody">
+            <div class="slds-text-heading_small">   
+              <lightning-record-edit-form 
+              object-api-name="Contact"
+              onsuccess={handleSuccess}>
+                <lightning-messages> </lightning-messages>
+                <lightning-input-field 
+                field-name="AccountId" 
+                value={recordId} 
+                disabled>
+                </lightning-input-field>               
+                <lightning-input-field field-name="FirstName"> </lightning-input-field>
+                <lightning-input-field field-name="LastName"> </lightning-input-field>
+                <lightning-input-field field-name="Phone"> </lightning-input-field>
+                <lightning-input-field field-name="Email"> </lightning-input-field>
+
+                <lightning-button
+                    class="slds-m-top_small slds-align_absolute-center"
+                    type="submit"
+                    label="Create new"
+                >
+                </lightning-button>
+            </lightning-record-edit-form>
+        
+              <!-- <b><i>{state.confirmationMessageForSendToToolbelt}</i></b> -->
+            </div>
+          </span>
+          <span slot="modalFooter">
+            <lightning-button
+              label="Cancel"
+              title="Cancel"
+              onclick={hideModalPopUpToCreateContact}
+              class="slds-var-m-left_x-small"
+              data-testid="cancelButton"
+            ></lightning-button>
+          </span>
+        </c-lwc-assi2-child-component>
+      </template>
+    
+</template>
