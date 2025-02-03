@@ -1,0 +1,11 @@
+<template>
+    <lightning-card title="Parent- Child Communication" icon-name="standard:record_form">
+        <div class="slds-text-align_center">
+            <h1><b>Parent component</b></h1>
+        </div>
+        <div class="slds-p-around_medium lgc-bg">
+            <lightning-input type="text" label="Enter greeting text" onchange={handleOnChangeInput}></lightning-input>
+        </div>
+        <c-child-component message={greeting}></c-child-component>
+    </lightning-card>
+</template>
