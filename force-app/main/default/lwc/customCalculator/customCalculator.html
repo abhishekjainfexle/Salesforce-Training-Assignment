@@ -1,0 +1,40 @@
+<template>
+    <lightning-card  title="Hello">
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="12" padding="around-small" small-device-size="3" medium-device-size="6"
+                large-device-size="6">
+                <lightning-input class="number1" name="Enter no1" label="Number_1" onchange={handlechange} placeholder="type your first number here..." 
+                ></lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" padding="around-small" small-device-size="3" medium-device-size="6"
+                large-device-size="6">
+                <lightning-input class="number2" name="Enter no2" label="Number_2" onchange={handlechange} placeholder="type your second number here..." 
+                 ></lightning-input>
+            </lightning-layout-item>
+        </lightning-layout>
+        <div class="slds-p-around_small slds-text-heading_medium">
+            <p>Result: <span class={resultClass}>{resultMessage}</span></p>
+        </div>
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="12" padding="around-small" small-device-size="6" medium-device-size="3"
+                large-device-size="3" onclick={handleValidation}>
+                <div style="width: 250px; height: 100px;">
+                    <lightning-button  variant="brand" label="Add" icon-name="utility:add"  onclick={doAdd}></lightning-button>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" padding="around-small" small-device-size="6" medium-device-size="3"
+                large-device-size="3" onclick={handleValidation}>
+                <lightning-button variant="brand" label="Sub" icon-name="utility:dash" onclick={doSub}></lightning-button>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" padding="around-small" small-device-size="6" medium-device-size="3"
+                large-device-size="3" onclick={handleValidation}>
+                <lightning-button variant="brand" label="Div" icon-name="utility:add" onclick={doDiv}></lightning-button>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" padding="around-small" small-device-size="6" medium-device-size="3"
+                large-device-size="3" onclick={handleValidation}>
+                <lightning-button variant="brand" label="Mul" icon-name="utility:add" onclick={doMul}></lightning-button>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+    
+</template>

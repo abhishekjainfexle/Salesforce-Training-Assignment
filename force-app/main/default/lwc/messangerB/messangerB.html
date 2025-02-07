@@ -1,0 +1,17 @@
+<template>
+    <lightning-card title="Messenger B">
+        <div class="slds-m-around_medium">
+            <lightning-input label="Message to Send" value={inputMessageToSend} onchange={handleChange}></lightning-input>
+            <div class="slds-p-top_x-small">
+                <lightning-button label="Send" variant="brand" onclick={handleSendMessageClick}  disabled={isSendDisabled}></lightning-button>
+            </div>
+        </div>
+        <div class="slds-m-around_medium">
+            <lightning-input label="Received Message" value={receivedMessage} readonly></lightning-input>
+        </div>
+        <div class="slds-m-around_medium slds-text-align_right">
+            <lightning-button label="Clear Chat" variant="neutral" onclick={clearChat}></lightning-button>
+        </div>
+        
+    </lightning-card>
+</template>
