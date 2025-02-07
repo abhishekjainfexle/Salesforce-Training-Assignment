@@ -1,0 +1,128 @@
+<template>
+    <lightning-card class="slds-p-around_medium" title="Account Information">
+      <lightning-record-view-form
+            object-api-name={objectApiName}
+            record-id={recordId}>
+                <div class="slds-box">
+                  <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12"   small-device-size="3" medium-device-size="6"
+                        large-device-size="6">
+                        <lightning-output-field field-name="Name"> </lightning-output-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12"   small-device-size="3" medium-device-size="6"
+                        large-device-size="6">
+                        <lightning-output-field field-name="OwnerId"></lightning-output-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12"   small-device-size="3" medium-device-size="6"
+                        large-device-size="6">
+                        <lightning-output-field field-name="Description"></lightning-output-field>
+                      </lightning-layout-item>
+                    <lightning-layout-item size="12"   small-device-size="3" medium-device-size="6"
+                        large-device-size="6">
+                        <p> Number Of Contact</p>
+                        <p>{state.resultData.length}</p>
+                    </lightning-layout-item>
+                </lightning-layout>
+                </div>
+        </lightning-record-view-form>
+        <div class="slds-box">
+            <lightning-layout horizontal-align="spread">
+                <lightning-layout-item size="6">
+                    <div>
+                        <lightning-input type="text" label="Search Contact" placeholder="Enter text to search Contact" onchange={handleSearchInputChange}></lightning-input> 
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="3"  >
+                </lightning-layout-item>
+                <lightning-layout-item size="3"  >
+                    <div class="slds-p-top_large">
+                        <lightning-button variant="brand" 
+                                label="Create New Contact" onclick={handleCreateContactButtonPopUpOnClick}>
+                        </lightning-button>  
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div> 
+
+        <lightning-datatable
+            key-field="id"
+            data={state.filteredContacts}
+            columns={props.columns}
+            show-row-number-column
+            row-number-offset={state.rowOffset}
+            draft-values={state.draftValues}
+            hide-checkbox-column
+            onsave={handleOnSave}
+            oncancel={handleOnCancel}
+            >
+        </lightning-datatable>
+        
+        <template if:true={isNoResults}>
+            <div class="slds-text-align_center slds-text-heading_large slds-p-around_medium">
+                <p class="slds-text-color_error"><b>No matching contacts found.</b></p>
+            </div>
+        </template>
+
+        <template if:true={state.showModalPopUpToCreateContact}>
+            <c-lwc-assi2-child-component
+              oncloselightningmodalpopup={hideModalPopUpToCreateContact}
+              is-small-modal
+              data-testid="sendToToolbeltLightningModal"
+            >
+              <span slot="modalTitle">Create New Contact</span>
+              <span slot="modalBody">
+                <div class="slds-text-heading_small slds-p-around_medium">  
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item size="12" padding="around-small"  small-device-size="3" medium-device-size="6"
+                        large-device-size="12">
+                            <lightning-input type="text" label="AccountName" value={state.accountName} disabled></lightning-input>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12"  padding="around-small" small-device-size="3" medium-device-size="6"
+                        large-device-size="6">
+                            <lightning-input type="text" label="FirstName" onchange={onChangeContactInput}></lightning-input>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" padding="around-small"  small-device-size="3" medium-device-size="6" large-device-size="6">
+                            <lightning-input type="text" label="LastName" onchange={onChangeContactInput} value={state.lastNameInput}></lightning-input>
+                            <template if:true={state.lastNameError}>
+                                <p class="slds-text-color_error">{state.lastNameError}</p>
+                            </template>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12"  padding="around-small" small-device-size="3" medium-device-size="6" large-device-size="6">
+                            <lightning-input type="text" label="Email" onchange={onChangeContactInput} value={state.emailInput}></lightning-input>
+                            <template if:true={state.emailError}>
+                                <p class="slds-text-color_error">{state.emailError}</p>
+                            </template>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12"  padding="around-small" small-device-size="3" medium-device-size="6"
+                        large-device-size="6">
+                            <lightning-input type="text" label="Phone" onchange={onChangeContactInput}></lightning-input>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12"  padding="around-small" small-device-size="3" medium-device-size="6"
+                        large-device-size="6">
+                        <c-generic-picklist-component onselectedvalue={handleEvent} object-name="Contact" label-to-show="Customer Status"
+                        field-name="Contact.Customer_status__c"></c-generic-picklist-component>
+                        </lightning-layout-item>
+                    </lightning-layout>            
+                    <lightning-button
+                        class="slds-m-top_small slds-align_absolute-center"
+                        label="Create new"
+                        onclick={handleCreateNewButtonOnClick}
+                    >
+                    </lightning-button>
+            
+                  <!-- <b><i>{state.confirmationMessageForSendToToolbelt}</i></b> -->
+                </div>
+              </span>
+              <span slot="modalFooter">
+                <lightning-button
+                  label="Cancel"
+                  title="Cancel"
+                  onclick={hideModalPopUpToCreateContact}
+                  class="slds-var-m-left_x-small"
+                  data-testid="cancelButton"
+                ></lightning-button>
+              </span>
+            </c-lwc-assi2-child-component>
+          </template>
+        </lightning-card>
+    </template>
