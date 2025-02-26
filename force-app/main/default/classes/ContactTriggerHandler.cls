@@ -51,24 +51,28 @@ public without sharing class ContactTriggerHandler extends TriggerHandler{
         // Delegate the main logic to a separate method
         handleContactBeforeLogicMainMethod(mapOfAccountAndId);
         showPickListNamesAndObjectNameUsingDynamicApex((List<Contact>) Trigger.new);
+        //setOfContactId((List<Contact>) Trigger.new);
+
     }
     
-    /**
-* Description : Validates that the email domain of a Contact matches the domain name
-* of the related parent Account during the 'before update' trigger event.
-* Throws an error if the domains do not match.
-* 
-* @Return : void
-* 
-* @Arguments : 
-
-* CreatedBy : Abhishek Jain
-* 
-* Created Date : 27/11/2024
-* 
-* Modified Date : 11-12-2024 by Abhishek Jain
-* */    
+  
+/**
+    * Description : Validates that the email domain of a Contact matches the domain name
+    * of the related parent Account during the 'before update' trigger event.
+    * Throws an error if the domains do not match.
+    * 
+    * @Return : void
+    * 
+    * @Arguments : 
     
+    * CreatedBy : Abhishek Jain
+    * 
+    * Created Date : 27/11/2024
+    * 
+	* Modified Date : 11-12-2024 by Abhishek Jain
+* */    
+
+
     public override void beforeUpdate() {
         
         // Map to hold Account IDs (key) for Contacts where validation is required
@@ -94,27 +98,46 @@ public without sharing class ContactTriggerHandler extends TriggerHandler{
                              '. AccountId or Email is null, or there is no relevant change.');
             }
         }
-        
         // Delegate the validation logic to the common method
-        handleContactBeforeLogicMainMethod(mapOfAccountAndId);
-        
+        handleContactBeforeLogicMainMethod(mapOfAccountAndId); 
     }
+
+
+/**
+    * Description : afterInsert method to Call Different classes and method to run after a record is inserted.
+    * 
+    * @Return : void
+    * 
+    * @Arguments : 
     
-    /**
-* Description : Main Logic to run in both Insert and update methods
-* 
-* @Return : void
-* 
-* @Arguments : 
-* 
-* CreatedBy : Abhishek Jain
-* 
-* Created Date : 27/11/2024
-* 
-* Modified Date : 11-12-2024 by Abhishek Jain
+    * CreatedBy : Abhishek Jain
+    * 
+    * Created Date : 19/02/2025
+    * 
+    * Modified Date : 11-12-2024 by Abhishek Jain
 * */    
     
     
+    public override void afterInsert(){
+            
+        IntegrationSmartyDemoHelper.setOfContactId((List<Contact>) Trigger.new); //Calling a method a to send new list of contact to get ContactID set.
+    
+    }
+    
+    
+/**
+    * Description : Main Logic to run in both Insert and update methods
+    * 
+    * @Return : void
+    * 
+    * @Arguments : 
+    * 
+    * CreatedBy : Abhishek Jain
+    * 
+    * Created Date : 27/11/2024
+    * 
+    * Modified Date : 11-12-2024 by Abhishek Jain
+* */        
     public static void handleContactBeforeLogicMainMethod(Map<Id, Account> mapOfId_Account) {
         
         // Initialize a map to store the queried Account records by their Id.
@@ -156,22 +179,21 @@ public without sharing class ContactTriggerHandler extends TriggerHandler{
                 }
             }
         }
-    }
-    
+    } 
     
     /**
-* Description : Method to use Dynamic apex to show object name and all the picklist field.
-* 
-* @Return : void
-* 
-* @Arguments : List<Contact> newContactList
-* 
-* CreatedBy : Abhishek Jain
-* 
-* Created Date : 26/12/2024
-* 
-* Modified Date : 
-* */    
+        * Description : Method to use Dynamic apex to show object name and all the picklist field.
+        * 
+        * @Return : void
+        * 
+        * @Arguments : List<Contact> newContactList
+        * 
+        * CreatedBy : Abhishek Jain
+        * 
+        * Created Date : 26/12/2024
+        * 
+        * Modified Date : 
+    * */    
     
     public static void showPickListNamesAndObjectNameUsingDynamicApex(List<Contact> newContactList){
         for(Contact con : newContactList){
@@ -218,5 +240,8 @@ public without sharing class ContactTriggerHandler extends TriggerHandler{
             }
         }
     }
+    
+    
+    
 
 }
